@@ -21,17 +21,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="#ff0000"
                 android:gravity="center"
-                android:text="Germany"
                 android:textSize="50sp" />
 
             <TextView
+                android:id="@+id/capital_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Berlin"
                 android:textSize="50sp" />
 
         </LinearLayout>

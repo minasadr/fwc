@@ -7,8 +7,19 @@ import android.app.FragmentManager
 import android.os.Bundle
 import android.support.v13.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
+import java.util.*
 
 class CountryActivity : Activity() {
+    val sampleCountries = arrayOf(
+            Pair("", ""),
+            Pair("Iran", "Tehran"),
+            Pair("Germany", "Berlin"),
+            Pair("Turkey", "Ankara"),
+            Pair("France", "Paris"),
+            Pair("Italy", "Rome"),
+            Pair("", ""))
+
+    val random = Random()
 
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
@@ -17,17 +28,29 @@ class CountryActivity : Activity() {
         val viewPager = findViewById(R.id.pager) as ViewPager
 
         viewPager.adapter = PagerAdapter(fragmentManager)
+        viewPager.currentItem = position()
+        viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+            override fun onPageSelected(position: Int) {
+                if (position == 0) {
+                    viewPager.setCurrentItem(sampleCountries.size - 2, false)
+                } else if (position == sampleCountries.size - 1) {
+                    viewPager.setCurrentItem(1, false)
+                }
+            }
+        })
     }
 
     private inner class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment {
-            return CountryFragment.create(position)
+            return CountryFragment.create(sampleCountries[position()])
         }
 
         override fun getCount(): Int {
-            return 50000
+            return sampleCountries.size
         }
     }
 
+
+    private fun position(): Int = 1 + random.nextInt(sampleCountries.size - 2)
 }
