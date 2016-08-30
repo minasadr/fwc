@@ -2,6 +2,7 @@ package io.sadr.fwc
 
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Fragment
 import android.app.FragmentManager
 import android.os.Bundle
@@ -38,6 +39,16 @@ class CountryActivity : Activity() {
                 }
             }
         })
+    }
+
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+                .setIcon(R.drawable.close_octagon)
+                .setTitle("Closing Application!")
+                .setMessage("Are you sure you want to close the application?")
+                .setPositiveButton("Yes") { dialog, which -> finish() }
+                .setNegativeButton("No", null)
+                .show()
     }
 
     private inner class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
