@@ -21,12 +21,6 @@ class DragLayout
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        this.post {
-            coverView = findViewById(R.id.cover)
-            val layoutParams = coverView.layoutParams
-            layoutParams.height = this.height / 2
-            coverView.layoutParams = layoutParams
-        }
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
