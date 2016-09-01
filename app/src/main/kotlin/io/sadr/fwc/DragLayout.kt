@@ -13,8 +13,6 @@ class DragLayout
 
     private val mDragHelper: ViewDragHelper
 
-    private lateinit var coverView: View
-
     init {
         mDragHelper = ViewDragHelper.create(this, 1f, DragHelperCallback())
     }
@@ -45,31 +43,24 @@ class DragLayout
             invalidate()
         }
 
-        override fun onViewCaptured(capturedChild: View?, activePointerId: Int) {
-            super.onViewCaptured(capturedChild, activePointerId)
-        }
-
-        override fun onViewReleased(releasedChild: View?, xvel: Float, yvel: Float) {
-            super.onViewReleased(releasedChild, xvel, yvel)
-        }
-
-        override fun onEdgeTouched(edgeFlags: Int, pointerId: Int) {
-            super.onEdgeTouched(edgeFlags, pointerId)
-        }
-
-        override fun onEdgeDragStarted(edgeFlags: Int, pointerId: Int) {
-            super.onEdgeDragStarted(edgeFlags, pointerId)
-        }
-
-        override fun clampViewPositionVertical(child: View?, top: Int, dy: Int): Int {
+        override fun clampViewPositionVertical(view: View?, top: Int, dy: Int): Int {
             val topBound = paddingTop
-            val bottomBound = height - coverView.height
+            val bottomBound = height - view!!.height
 
             return Math.min(Math.max(top, topBound), bottomBound)
         }
 
-        override fun clampViewPositionHorizontal(child: View?, left: Int, dx: Int): Int {
-            return super.clampViewPositionHorizontal(child, left, dx)
+        override fun onViewReleased(view: View?, xvel: Float, yvel: Float) {
+            val coverView = view!!
+            val h = coverView.height
+            val center = coverView.top + h / 2
+            if (center < height / 2) {
+                coverView.top = 0
+                coverView.bottom = h
+            } else {
+                coverView.top = height - coverView.height
+                coverView.bottom = height
+            }
         }
     }
 }
