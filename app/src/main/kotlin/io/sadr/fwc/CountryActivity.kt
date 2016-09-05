@@ -76,7 +76,6 @@ class CountryActivity : Activity() {
         }
     }
 
-
     private fun position(): Int = 1 + random.nextInt(sampleCountries.size - 2)
 
     private class Showcase(activity: Activity) {
