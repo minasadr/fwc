@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun exit(): Boolean {
         AlertDialog.Builder(this)
-                .setIcon(R.drawable.close_octagon)
+                .setIcon(R.mipmap.ic_launcher)
                 .setTitle("Closing Application!")
                 .setMessage("Are you sure you want to close the application?")
                 .setPositiveButton("Yes") { dialog, which -> finish() }
@@ -58,9 +58,16 @@ class MainActivity : AppCompatActivity() {
         val version = packageManager.getPackageInfo(packageName, 0).versionName
 
         AlertDialog.Builder(this)
-                .setIcon(R.drawable.about)
+                .setIcon(R.mipmap.ic_launcher)
                 .setTitle("Fun With Countries")
-                .setMessage("Version $version\n\nDevelopers:\n\tKaveh\n\tMina")
+                .setMessage(
+                        """
+                        Version $version
+
+                        Developers:
+                            - Kaveh
+                            - Mina
+                        """.trimIndent())
                 .setNegativeButton("OK", null)
                 .show()
         return true
