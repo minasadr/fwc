@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item!!.itemId) {
             R.id.action_exit -> exit()
-            R.id.action_about -> true
+            R.id.action_about -> about()
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -50,6 +50,18 @@ class MainActivity : AppCompatActivity() {
                 .setMessage("Are you sure you want to close the application?")
                 .setPositiveButton("Yes") { dialog, which -> finish() }
                 .setNegativeButton("No", null)
+                .show()
+        return true
+    }
+
+    private fun about(): Boolean {
+        val version = packageManager.getPackageInfo(packageName, 0).versionName
+
+        AlertDialog.Builder(this)
+                .setIcon(R.drawable.about)
+                .setTitle("Fun With Countries")
+                .setMessage("Version $version\n\nDevelopers:\n\tKaveh\n\tMina")
+                .setNegativeButton("OK", null)
                 .show()
         return true
     }
