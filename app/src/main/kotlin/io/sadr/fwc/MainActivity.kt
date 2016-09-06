@@ -64,9 +64,7 @@ class MainActivity : AppCompatActivity() {
                         """
                         Version $version
 
-                        Developers:
-                            - Kaveh
-                            - Mina
+                        © 2016 - all rights reserved
                         """.trimIndent())
                 .setNegativeButton("OK", null)
                 .show()

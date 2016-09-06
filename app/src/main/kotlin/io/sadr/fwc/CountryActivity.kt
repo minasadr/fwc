@@ -90,6 +90,7 @@ class CountryActivity : Activity() {
                     .setOnClickListener { buildOnClickListener() }
                     .setContentTitle("View the Answer")
                     .setContentText("Swipe the Cover Up to see the Answer")
+                    .setStyle(5)
                     .build()
             showcaseView.setButtonText("Next")
         }
