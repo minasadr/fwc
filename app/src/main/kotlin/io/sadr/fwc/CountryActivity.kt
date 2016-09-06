@@ -17,15 +17,6 @@ class CountryActivity : Activity() {
         const val SHOWCASE = "SHOWCASE"
     }
 
-    val sampleCountries = arrayOf(
-            Pair("", ""),
-            Pair("Iran", "Tehran"),
-            Pair("Germany", "Berlin"),
-            Pair("Turkey", "Ankara"),
-            Pair("France", "Paris"),
-            Pair("Italy", "Rome"),
-            Pair("", ""))
-
     val random = Random()
 
     override fun onCreate(state: Bundle?) {
@@ -39,8 +30,8 @@ class CountryActivity : Activity() {
         viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 if (position == 0) {
-                    viewPager.setCurrentItem(sampleCountries.size - 2, false)
-                } else if (position == sampleCountries.size - 1) {
+                    viewPager.setCurrentItem(COUNTRIES.size - 2, false)
+                } else if (position == COUNTRIES.size - 1) {
                     viewPager.setCurrentItem(1, false)
                 }
             }
@@ -68,15 +59,15 @@ class CountryActivity : Activity() {
     private inner class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment {
-            return CountryFragment.create(sampleCountries[position()])
+            return CountryFragment.create(COUNTRIES[position()])
         }
 
         override fun getCount(): Int {
-            return sampleCountries.size
+            return COUNTRIES.size
         }
     }
 
-    private fun position(): Int = 1 + random.nextInt(sampleCountries.size - 2)
+    private fun position(): Int = 1 + random.nextInt(COUNTRIES.size - 2)
 
     private class Showcase(activity: Activity) {
         val metrics = DisplayMetrics()
