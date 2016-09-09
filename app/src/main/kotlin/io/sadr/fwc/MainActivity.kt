@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         AlertDialog.Builder(this)
                 .setIcon(R.mipmap.ic_launcher)
-                .setTitle("Fun With Countries")
+                .setTitle("Fun with Countries")
                 .setMessage(
                         """
                         Version $version

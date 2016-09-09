@@ -36,11 +36,6 @@ class CountryActivity : Activity() {
                 }
             }
         })
-
-        val showcase = intent.getBooleanExtra(SHOWCASE, false)
-        if (showcase) {
-            Showcase(this)
-        }
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -53,6 +48,11 @@ class CountryActivity : Activity() {
                     View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
                     View.SYSTEM_UI_FLAG_FULLSCREEN or
                     View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+
+            val showcase = intent.getBooleanExtra(SHOWCASE, false)
+            if (showcase) {
+                Showcase(this)
+            }
         }
     }
 
@@ -77,36 +77,37 @@ class CountryActivity : Activity() {
         init {
             activity.windowManager.defaultDisplay.getRealMetrics(metrics)
             showcaseView = ShowcaseView.Builder(activity)
+                    .withMaterialShowcase()
+                    .setOnClickListener { showNext() }
+                    .setStyle(R.style.CustomShowcaseTheme)
                     .setTarget(PointTarget(metrics.widthPixels / 2, metrics.heightPixels * 3 / 4))
-                    .setOnClickListener { buildOnClickListener() }
-                    .setContentTitle("View the Answer")
-                    .setContentText("Swipe the Cover Up to see the Answer")
-                    .setStyle(5)
+                    .setContentTitle("View the answer")
+                    .setContentText("Swipe the cover up to see the answer")
                     .build()
-            showcaseView.setButtonText("Next")
         }
 
-        private fun buildOnClickListener() {
+        private fun showNext() {
             when (++counter) {
                 1 -> {
                     showcaseView.setShowcase(PointTarget(metrics.widthPixels, metrics.heightPixels / 2), true)
-                    showcaseView.setContentTitle("Next Question")
-                    showcaseView.setContentText("Swipe to the Left to see the Next Question")
+                    showcaseView.setContentTitle("Next question")
+                    showcaseView.setContentText("Swipe to the left to see the next question")
                 }
                 2 -> {
                     showcaseView.setShowcase(PointTarget(0, metrics.heightPixels / 2), true)
-                    showcaseView.setContentTitle("Next Question")
-                    showcaseView.setContentText("Swipe to the Right does the same")
+                    showcaseView.setContentTitle("Next question")
+                    showcaseView.setContentText("Swipe to the right does the same")
                 }
                 3 -> {
                     showcaseView.setShowcase(PointTarget(metrics.widthPixels / 2, 0), true)
-                    showcaseView.setContentTitle("Leave Fullscreen")
-                    showcaseView.setContentText("Swipe to the Bottom to exit Fullscreen mode")
+                    showcaseView.setContentTitle("Leave fullscreen")
+                    showcaseView.setContentText("Swipe to the bottom to exit fullscreen mode")
                 }
                 4 -> {
                     showcaseView.setShowcase(PointTarget(metrics.widthPixels / 2, metrics.heightPixels), true)
-                    showcaseView.setContentTitle("Leave Fullscreen")
-                    showcaseView.setContentText("Swipe to the Top does the same")
+                    showcaseView.setContentTitle("Leave fullscreen")
+                    showcaseView.setContentText("Swipe to the top does the same")
+                    showcaseView.setButtonText("Close")
                 }
                 5 -> showcaseView.hide()
             }
