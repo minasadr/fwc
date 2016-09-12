@@ -14,10 +14,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val playButton = findViewById(R.id.button_play)
-        playButton.setOnClickListener { play(false) }
+        playButton.setOnClickListener { play() }
 
         val helpButton = findViewById(R.id.button_help)
-        helpButton.setOnClickListener { play(true) }
+        helpButton.setOnClickListener { tour() }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -37,10 +37,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun play(showCase: Boolean) {
-        val intent = Intent(this@MainActivity, CountryActivity::class.java)
-        intent.putExtra(CountryActivity.SHOWCASE, showCase)
-        this@MainActivity.startActivity(intent)
+    private fun play() {
+        val intent = Intent(this, CountryActivity::class.java)
+        this.startActivity(intent)
+    }
+
+    private fun tour() {
+        val intent = Intent(this, TourCountryActivity::class.java)
+        this.startActivity(intent)
     }
 
     private fun exit(): Boolean {

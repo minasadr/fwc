@@ -22,9 +22,12 @@
         <activity
             android:name=".CountryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme">
-        </activity>
+            android:label="@string/app_name" />
+
+        <activity
+            android:name=".TourCountryActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name" />
 
     </application>
 
