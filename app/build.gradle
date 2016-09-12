@@ -9,8 +9,8 @@ android {
         applicationId "io.sadr.fun.with.countries"
         minSdkVersion 21
         targetSdkVersion 24
-        versionCode 3
-        versionName "1.0.0-Beta.3"
+        versionCode 4
+        versionName "1.0.0-Beta.4"
     }
     buildTypes {
         release {

@@ -3,7 +3,6 @@ package io.sadr.fwc
 import android.app.Activity
 import android.app.Fragment
 import android.app.FragmentManager
-import android.content.Intent
 import android.os.Bundle
 import android.support.v13.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
@@ -44,11 +43,6 @@ open class CountryActivity : Activity() {
                     View.SYSTEM_UI_FLAG_FULLSCREEN or
                     View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         }
-    }
-
-    override fun onBackPressed() {
-        val intent = Intent(this, MainActivity::class.java)
-        this.startActivity(intent)
     }
 
     private fun position(): Int = 1 + random.nextInt(COUNTRIES.size - 2)
