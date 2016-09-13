@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         helpButton.setOnClickListener { tour() }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
         exit()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item!!.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
             R.id.action_exit -> exit()
             R.id.action_about -> about()
             else -> super.onOptionsItemSelected(item)

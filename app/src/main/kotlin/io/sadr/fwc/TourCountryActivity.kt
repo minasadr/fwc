@@ -10,9 +10,9 @@ import com.github.amlcurran.showcaseview.targets.PointTarget
 
 class TourCountryActivity : CountryActivity() {
 
-    var metrics = DisplayMetrics()
-    var counter = 5
-    lateinit var showcaseView: ShowcaseView
+    private var pageNumber = 1
+    private val metrics = DisplayMetrics()
+    private lateinit var showcaseView: ShowcaseView
 
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
@@ -40,15 +40,16 @@ class TourCountryActivity : CountryActivity() {
         showNext(0)
     }
 
-    private fun showNext(dec: Int) {
-        counter -= dec
-        when (counter) {
-            5 -> {
+    private fun showNext(inc: Int) {
+        pageNumber += inc
+
+        when (pageNumber) {
+            1 -> {
                 showcaseView.setShowcase(PointTarget(metrics.widthPixels / 2, metrics.heightPixels * 3 / 4), true)
                 showcaseView.setContentTitle("View the answer")
                 showcaseView.setContentText("Swipe the cover up to see the answer")
             }
-            4 -> {
+            2 -> {
                 showcaseView.setShowcase(PointTarget(metrics.widthPixels, metrics.heightPixels / 2), true)
                 showcaseView.setContentTitle("Next question")
                 showcaseView.setContentText("Swipe to the left to see the next question")
@@ -58,18 +59,18 @@ class TourCountryActivity : CountryActivity() {
                 showcaseView.setContentTitle("Next question")
                 showcaseView.setContentText("Swipe to the right does the same")
             }
-            2 -> {
+            4 -> {
                 showcaseView.setShowcase(PointTarget(metrics.widthPixels / 2, 0), true)
                 showcaseView.setContentTitle("Leave fullscreen")
                 showcaseView.setContentText("Swipe to the bottom to exit fullscreen mode")
             }
-            1 -> {
+            5 -> {
                 showcaseView.setShowcase(PointTarget(metrics.widthPixels / 2, metrics.heightPixels), true)
                 showcaseView.setContentTitle("Leave fullscreen")
                 showcaseView.setContentText("Swipe to the top does the same")
                 showcaseView.setButtonText("Close")
             }
-            0 -> {
+            6 -> {
                 showcaseView.hide()
                 val intent = Intent(this, CountryActivity::class.java)
                 this.startActivity(intent)

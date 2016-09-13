@@ -23,20 +23,17 @@ class CountryFragment : Fragment() {
         }
     }
 
-    private var country: String = ""
-    private var capital: String = ""
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup,
+                              state: Bundle?): View {
 
-    override fun onCreate(state: Bundle?) {
-        super.onCreate(state)
-        country = arguments.getString(ARG_COUNTRY)
-        capital = arguments.getString(ARG_CAPITAL)
-    }
+        val fragment = inflater.inflate(R.layout.fragment_country, container, false) as ViewGroup
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, state: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_country, container, false) as ViewGroup
+        val country = arguments.getString(ARG_COUNTRY)
+        val capital = arguments.getString(ARG_CAPITAL)
 
-        (rootView.findViewById(R.id.country_name) as TextView).text = country
-        (rootView.findViewById(R.id.capital_name) as TextView).text = capital
-        return rootView
+        (fragment.findViewById(R.id.country_name) as TextView).text = country
+        (fragment.findViewById(R.id.capital_name) as TextView).text = capital
+        return fragment
     }
 }
