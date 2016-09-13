@@ -4,8 +4,9 @@ import android.content.Context
 import android.support.v7.widget.CardView
 import android.util.AttributeSet
 
-class CoverView(context: Context, attrs: AttributeSet?, defStyleAttr: Int = 0) :
-        CardView(context, attrs, defStyleAttr) {
+class CoverView(context: Context,
+                attrs: AttributeSet?,
+                defStyleAttr: Int = 0) : CardView(context, attrs, defStyleAttr) {
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 

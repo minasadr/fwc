@@ -11,16 +11,17 @@ import java.util.*
 
 open class CountryActivity : Activity() {
 
-    val random = Random()
+    private val pager = Pager()
 
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
         setContentView(R.layout.activity_country)
 
-        val viewPager = findViewById(R.id.pager) as ViewPager
+        val viewPager = findViewById(R.id.view_pager) as ViewPager
 
-        viewPager.adapter = PagerAdapter(fragmentManager)
-        viewPager.currentItem = position()
+        viewPager.currentItem = pager.next()
+        viewPager.adapter = PagerAdapter(pager, fragmentManager)
+
         viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 if (position == 0) {
@@ -35,7 +36,7 @@ open class CountryActivity : Activity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {
-            val viewPager = findViewById(R.id.pager) as ViewPager
+            val viewPager = findViewById(R.id.view_pager) as ViewPager
             viewPager.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                     View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
@@ -44,17 +45,22 @@ open class CountryActivity : Activity() {
                     View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         }
     }
+}
 
-    private fun position(): Int = 1 + random.nextInt(COUNTRIES.size - 2)
+private class PagerAdapter(val pager: Pager, fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-    private inner class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
-
-        override fun getItem(position: Int): Fragment {
-            return CountryFragment.create(COUNTRIES[position()])
-        }
-
-        override fun getCount(): Int {
-            return COUNTRIES.size
-        }
+    override fun getItem(position: Int): Fragment {
+        return CountryFragment.create(COUNTRIES[pager.next()])
     }
+
+    override fun getCount(): Int {
+        return COUNTRIES.size
+    }
+}
+
+private class Pager {
+
+    private val random = Random()
+
+    fun next(): Int = 1 + random.nextInt(COUNTRIES.size - 2)
 }

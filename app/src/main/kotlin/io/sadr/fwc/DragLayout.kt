@@ -9,29 +9,27 @@ import android.view.View
 import android.widget.RelativeLayout
 
 class DragLayout
-@JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : RelativeLayout(context, attrs, defStyle) {
+@JvmOverloads constructor(context: Context,
+                          attrs: AttributeSet? = null,
+                          defStyle: Int = 0) : RelativeLayout(context, attrs, defStyle) {
 
-    private val mDragHelper: ViewDragHelper
+    private val dragHelper: ViewDragHelper
 
     init {
-        mDragHelper = ViewDragHelper.create(this, 1f, DragHelperCallback())
-    }
-
-    override fun onFinishInflate() {
-        super.onFinishInflate()
+        dragHelper = ViewDragHelper.create(this, 1f, DragHelperCallback())
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         val action = MotionEventCompat.getActionMasked(ev)
         if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP) {
-            mDragHelper.cancel()
+            dragHelper.cancel()
             return false
         }
-        return mDragHelper.shouldInterceptTouchEvent(ev)
+        return dragHelper.shouldInterceptTouchEvent(ev)
     }
 
     override fun onTouchEvent(ev: MotionEvent): Boolean {
-        mDragHelper.processTouchEvent(ev)
+        dragHelper.processTouchEvent(ev)
         return true
     }
 
@@ -39,27 +37,30 @@ class DragLayout
 
         override fun tryCaptureView(child: View, pointerId: Int): Boolean = true
 
-        override fun onViewPositionChanged(changedView: View?, left: Int, top: Int, dx: Int, dy: Int) {
+        override fun onViewPositionChanged(changedView: View,
+                                           left: Int,
+                                           top: Int,
+                                           dx: Int,
+                                           dy: Int) {
+
             invalidate()
         }
 
-        override fun clampViewPositionVertical(view: View?, top: Int, dy: Int): Int {
-            val topBound = paddingTop
-            val bottomBound = height - view!!.height
+        override fun clampViewPositionVertical(view: View, top: Int, dy: Int): Int {
+            val bottomBound = height - view.height
 
-            return Math.min(Math.max(top, topBound), bottomBound)
+            return Math.min(Math.max(top, paddingTop), bottomBound)
         }
 
-        override fun onViewReleased(view: View?, xvel: Float, yvel: Float) {
-            val coverView = view!!
-            val h = coverView.height
-            val center = coverView.top + h / 2
+        override fun onViewReleased(view: View, xvel: Float, yvel: Float) {
+            val h = view.height
+            val center = view.top + h / 2
             if (center < height / 2) {
-                coverView.top = 0
-                coverView.bottom = h
+                view.top = 0
+                view.bottom = h
             } else {
-                coverView.top = height - coverView.height
-                coverView.bottom = height
+                view.top = height - view.height
+                view.bottom = height
             }
         }
     }

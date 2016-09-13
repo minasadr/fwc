@@ -40,7 +40,7 @@
             android:id="@+id/button_help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:text="Take a Tour"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
 
@@ -48,7 +48,7 @@
             android:id="@+id/button_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:text="Play the Game"
             style="@style/Widget.AppCompat.Button.Colored"/>
     </LinearLayout>
