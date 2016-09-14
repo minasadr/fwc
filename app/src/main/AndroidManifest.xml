@@ -16,19 +16,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.github.com"
-                    android:pathPrefix="/sadr/fwc"
-                    android:scheme="http" />
-                <data
-                    android:host="fwc"
-                    android:scheme="example" />
             </intent-filter>
         </activity>
 
